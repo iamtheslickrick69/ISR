@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { ChevronDown, Menu, X } from "lucide-react"
+import { ChevronDown, Menu, X, Calendar, MessageSquare, Bell } from "lucide-react"
 
 interface ProDashboardHeaderProps {
   activeTab: string
@@ -37,11 +37,15 @@ export function ProDashboardHeader({ activeTab, onTabChange }: ProDashboardHeade
 
   const tabs = [
     { id: "dashboard", label: "DASHBOARD" },
-    { id: "profile", label: "PROFILE" },
+    { id: "calendar", label: "CALENDAR" },
     { id: "clients", label: "CLIENTS" },
+    { id: "messages", label: "MESSAGES" },
     { id: "earnings", label: "EARNINGS" },
-    { id: "academy", label: "ACADEMY" },
   ]
+
+  // Count for notification badges
+  const unreadMessages = 3
+  const pendingBookings = 2
 
   return (
     <header
@@ -83,16 +87,26 @@ export function ProDashboardHeader({ activeTab, onTabChange }: ProDashboardHeade
         </div>
 
         {/* CENTER - Navigation Tabs (Desktop) */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6">
           {tabs.map((tab, index) => (
-            <div key={tab.id} className="flex items-center gap-8">
+            <div key={tab.id} className="flex items-center gap-6">
               <button
                 onClick={() => onTabChange(tab.id)}
-                className={`font-bold text-[14px] tracking-wide transition-all relative ${
+                className={`font-bold text-[14px] tracking-wide transition-all relative flex items-center gap-1.5 ${
                   activeTab === tab.id ? "text-[#226D50]" : "text-[#6B7280] hover:text-[#226D50]/80"
                 }`}
               >
                 {tab.label}
+                {tab.id === "messages" && unreadMessages > 0 && (
+                  <span className="w-5 h-5 bg-[#BF2424] text-white text-[10px] flex items-center justify-center rounded-full">
+                    {unreadMessages}
+                  </span>
+                )}
+                {tab.id === "calendar" && pendingBookings > 0 && (
+                  <span className="w-5 h-5 bg-[#a29e7b] text-white text-[10px] flex items-center justify-center rounded-full">
+                    {pendingBookings}
+                  </span>
+                )}
                 {activeTab === tab.id && (
                   <div className="absolute -bottom-[22px] left-0 right-0 h-[3px] bg-[#226D50]" />
                 )}
@@ -100,6 +114,37 @@ export function ProDashboardHeader({ activeTab, onTabChange }: ProDashboardHeade
               {index < tabs.length - 1 && <span className="text-gray-300">|</span>}
             </div>
           ))}
+          {/* Academy Logo Button - after tabs */}
+          <span className="text-gray-300">|</span>
+          <button
+            onClick={() => onTabChange("academy")}
+            className={`relative transition-all ${activeTab === "academy" ? "scale-105" : "hover:scale-105"}`}
+          >
+            <img
+              src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/aaablack1.png"
+              alt="Academy"
+              className="h-[28px]"
+              style={{
+                clipPath: "polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
+              }}
+            />
+            {activeTab === "academy" && (
+              <div className="absolute -bottom-[22px] left-0 right-0 h-[3px] bg-[#BF2424]" />
+            )}
+          </button>
+          {/* Profile Tab */}
+          <span className="text-gray-300">|</span>
+          <button
+            onClick={() => onTabChange("profile")}
+            className={`font-bold text-[14px] tracking-wide transition-all relative ${
+              activeTab === "profile" ? "text-[#226D50]" : "text-[#6B7280] hover:text-[#226D50]/80"
+            }`}
+          >
+            PROFILE
+            {activeTab === "profile" && (
+              <div className="absolute -bottom-[22px] left-0 right-0 h-[3px] bg-[#226D50]" />
+            )}
+          </button>
         </nav>
 
         {/* RIGHT - Profile */}
@@ -161,7 +206,7 @@ export function ProDashboardHeader({ activeTab, onTabChange }: ProDashboardHeade
           </div>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 text-gray-600">
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 text-gray-600">
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -169,7 +214,7 @@ export function ProDashboardHeader({ activeTab, onTabChange }: ProDashboardHeade
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg animate-slideDown">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg animate-slideDown">
           <nav className="flex flex-col py-2">
             {tabs.map((tab) => (
               <button
@@ -178,13 +223,47 @@ export function ProDashboardHeader({ activeTab, onTabChange }: ProDashboardHeade
                   onTabChange(tab.id)
                   setMobileMenuOpen(false)
                 }}
-                className={`px-6 py-3 text-left font-bold text-sm tracking-wide ${
+                className={`px-6 py-3 text-left font-bold text-sm tracking-wide flex items-center justify-between ${
                   activeTab === tab.id ? "text-[#226D50] bg-green-50" : "text-gray-600 hover:bg-gray-50"
                 }`}
               >
-                {tab.label}
+                <span>{tab.label}</span>
+                {tab.id === "messages" && unreadMessages > 0 && (
+                  <span className="w-5 h-5 bg-[#BF2424] text-white text-[10px] flex items-center justify-center rounded-full">
+                    {unreadMessages}
+                  </span>
+                )}
+                {tab.id === "calendar" && pendingBookings > 0 && (
+                  <span className="w-5 h-5 bg-[#a29e7b] text-white text-[10px] flex items-center justify-center rounded-full">
+                    {pendingBookings}
+                  </span>
+                )}
               </button>
             ))}
+            {/* Academy */}
+            <button
+              onClick={() => {
+                onTabChange("academy")
+                setMobileMenuOpen(false)
+              }}
+              className={`px-6 py-3 text-left font-bold text-sm tracking-wide ${
+                activeTab === "academy" ? "text-[#BF2424] bg-red-50" : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              ACADEMY
+            </button>
+            {/* Profile */}
+            <button
+              onClick={() => {
+                onTabChange("profile")
+                setMobileMenuOpen(false)
+              }}
+              className={`px-6 py-3 text-left font-bold text-sm tracking-wide ${
+                activeTab === "profile" ? "text-[#226D50] bg-green-50" : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              PROFILE
+            </button>
           </nav>
         </div>
       )}

@@ -54,7 +54,7 @@ export function OurJourneySection() {
 
       <div
         ref={cardRef}
-        className={`relative z-10 bg-white py-12 px-8 sm:py-16 sm:px-20 max-w-[918px] w-[90%] mx-auto text-center shadow-[0_16px_64px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out-expo ${
+        className={`relative z-10 bg-white py-12 px-8 sm:py-16 sm:px-20 max-w-[1100px] w-[90%] mx-auto text-center shadow-[0_16px_64px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out-expo ${
           cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
         style={{
@@ -69,7 +69,7 @@ export function OurJourneySection() {
           className="text-sm sm:text-lg md:text-xl text-[#333333] mb-8 tracking-[0.1em] sm:tracking-[0.15em] uppercase text-balance px-4"
           style={{ fontFamily: "var(--font-futuristic), sans-serif", fontWeight: "700" }}
         >
-          The purpose is not to be perfect, but to get better every day.
+          The purpose is not to be perfect, <span className="text-[#D4AF37]">but to get better every day.</span>
         </p>
 
         {/* Divider 1 */}
@@ -115,7 +115,7 @@ export function OurJourneySection() {
           <div className="text-center max-w-[280px]">
             <p className="font-serif text-sm text-[#a29e7b] tracking-[2px] mb-3 uppercase">FOR INSTRUCTORS</p>
             <p className="text-[#666666] text-base leading-relaxed mb-5 whitespace-nowrap">
-              Build your business. Grow your reach.
+              Build your business. Grow the game.
             </p>
             <button
               className="group bg-[#a29e7b] text-white font-serif text-sm tracking-wider px-7 py-3.5 uppercase hover:bg-[#8a8568] hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(162,158,123,0.3)] transition-all duration-200 ease-out-expo"

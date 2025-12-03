@@ -7,6 +7,8 @@ import { ProProfileTab } from "@/components/pro-dashboard/tabs/pro-profile-tab"
 import { ProClientsTab } from "@/components/pro-dashboard/tabs/pro-clients-tab"
 import { ProEarningsTab } from "@/components/pro-dashboard/tabs/pro-earnings-tab"
 import { ProAcademyTab } from "@/components/pro-dashboard/tabs/pro-academy-tab"
+import { ProCalendarTab } from "@/components/pro-dashboard/tabs/pro-calendar-tab"
+import { ProMessagesTab } from "@/components/pro-dashboard/tabs/pro-messages-tab"
 
 export default function ProDashboard() {
   const [activeTab, setActiveTab] = useState("dashboard")
@@ -23,6 +25,10 @@ export default function ProDashboard() {
         return <ProEarningsTab />
       case "academy":
         return <ProAcademyTab />
+      case "calendar":
+        return <ProCalendarTab />
+      case "messages":
+        return <ProMessagesTab />
       default:
         return <ProDashboardTab />
     }

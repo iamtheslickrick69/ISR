@@ -76,16 +76,20 @@ export function UnifiedHeader({ variant = "landing" }: UnifiedHeaderProps) {
         <div className="h-full flex items-center justify-between">
           {/* Logo (Left) */}
           <Link href="/" className="flex items-center">
-            <Image
-              src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/logocaddybaby.png"
-              alt="CaddyMe"
-              width={240}
-              height={60}
-              className={`w-auto transition-all duration-300 ${
-                isScrolled ? "h-[34px] md:h-[37px]" : "h-[41px] md:h-[44px]"
-              }`}
-              priority
-            />
+            <div
+              style={{
+                clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
+              }}
+            >
+              <Image
+                src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/logocaddybaby.png"
+                alt="CaddyMe"
+                width={240}
+                height={60}
+                className="w-auto h-[46px] transition-all duration-300"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Center Nav Links (Landing only, Desktop) */}
@@ -111,9 +115,9 @@ export function UnifiedHeader({ variant = "landing" }: UnifiedHeaderProps) {
             {variant === "landing" && (
               <button
                 onClick={() => setIsRoleModalOpen(true)}
-                className={`hidden md:block px-4 py-1.5 font-sans text-[14px] font-semibold uppercase tracking-[0.05em] transition-all duration-200 ease-out bg-[#a29e7b] text-white hover:bg-[#8a8565] hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(162,158,123,0.4)]`}
+                className={`hidden md:block px-8 py-3 font-sans text-[18px] font-semibold uppercase tracking-[0.05em] transition-all duration-200 ease-out bg-[#a29e7b] text-white hover:bg-[#8a8565] hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(162,158,123,0.4)]`}
                 style={{
-                  clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+                  clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
                 }}
               >
                 Get Started <span className="inline-block ml-1">→</span>

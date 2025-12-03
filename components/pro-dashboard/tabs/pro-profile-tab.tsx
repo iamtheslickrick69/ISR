@@ -1,7 +1,21 @@
 "use client"
 
 import { useState } from "react"
-import { Camera, Upload, Check, Star, ChevronRight } from "lucide-react"
+import {
+  Camera,
+  Upload,
+  Check,
+  Star,
+  ChevronRight,
+  Monitor,
+  MapPin,
+  Flag,
+  Plus,
+  X,
+  DollarSign,
+  Clock,
+  Edit2,
+} from "lucide-react"
 
 export function ProProfileTab() {
   const [imageError, setImageError] = useState(false)
@@ -15,7 +29,48 @@ export function ProProfileTab() {
     sun: { active: false, start: "", end: "" },
   })
 
+  const [lessonTypes, setLessonTypes] = useState({
+    virtual: { enabled: true, price: 60, duration: 45 },
+    simulator: { enabled: true, price: 90, duration: 60 },
+    onCourse: { enabled: true, price: 120, duration: 90 },
+  })
+
+  const [specialties, setSpecialties] = useState([
+    "Short Game",
+    "Putting",
+    "Mental Game",
+    "Driver",
+  ])
+
+  const [locations, setLocations] = useState([
+    { id: "1", name: "Back9 Simulator - Downtown", type: "simulator", address: "123 Main St, Denver, CO" },
+    { id: "2", name: "Fox Hollow Golf Course", type: "course", address: "13410 W Morrison Rd, Lakewood, CO" },
+  ])
+
+  const allSpecialties = [
+    "Short Game",
+    "Putting",
+    "Mental Game",
+    "Driver",
+    "Irons",
+    "Wedges",
+    "Course Management",
+    "Fitness",
+    "Junior Coaching",
+    "Beginner Friendly",
+    "Advanced Players",
+    "Competition Prep",
+  ]
+
   const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+
+  const toggleSpecialty = (specialty: string) => {
+    if (specialties.includes(specialty)) {
+      setSpecialties(specialties.filter((s) => s !== specialty))
+    } else {
+      setSpecialties([...specialties, specialty])
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -62,8 +117,42 @@ export function ProProfileTab() {
                   </div>
                   <span className="text-sm text-gray-600">5.0 (250)</span>
                 </div>
-                <p className="text-[#a29e7b] font-serif text-lg">$90/hr</p>
+                <p className="text-[#a29e7b] font-serif text-lg">$60-$120/hr</p>
               </div>
+            </div>
+
+            {/* Lesson Type Pills */}
+            <div className="flex flex-wrap gap-2 mt-4">
+              {lessonTypes.virtual.enabled && (
+                <span
+                  className="text-xs px-3 py-1 bg-[#226D50]/10 text-[#226D50]"
+                  style={{
+                    clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+                  }}
+                >
+                  Virtual ${lessonTypes.virtual.price}
+                </span>
+              )}
+              {lessonTypes.simulator.enabled && (
+                <span
+                  className="text-xs px-3 py-1 bg-[#a29e7b]/10 text-[#a29e7b]"
+                  style={{
+                    clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+                  }}
+                >
+                  Simulator ${lessonTypes.simulator.price}
+                </span>
+              )}
+              {lessonTypes.onCourse.enabled && (
+                <span
+                  className="text-xs px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37]"
+                  style={{
+                    clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+                  }}
+                >
+                  On-Course ${lessonTypes.onCourse.price}
+                </span>
+              )}
             </div>
 
             {/* Badges Row */}
@@ -133,22 +222,6 @@ export function ProProfileTab() {
               />
             </div>
 
-            {/* Hourly Rate */}
-            <div>
-              <label className="block text-xs font-medium text-gray-600 mb-2">Hourly Rate</label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
-                <input
-                  type="number"
-                  defaultValue="90"
-                  className="w-full pl-8 pr-4 py-3 border border-gray-200 text-sm focus:border-[#a29e7b] focus:ring-2 focus:ring-[#a29e7b]/15 outline-none transition-all"
-                  style={{
-                    clipPath: "polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
-                  }}
-                />
-              </div>
-            </div>
-
             {/* Bio Textarea */}
             <div>
               <label className="block text-xs font-medium text-gray-600 mb-2">Bio (max 500 chars)</label>
@@ -190,6 +263,324 @@ export function ProProfileTab() {
             >
               SAVE CHANGES
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Lesson Types Card - Full Width */}
+      <div
+        className="bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.12)]"
+        style={{
+          clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+        }}
+      >
+        <h4 className="font-serif text-sm tracking-[0.1em] text-gray-400 mb-5">LESSON TYPES & PRICING</h4>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Virtual */}
+          <div
+            className={`p-5 border-2 transition-all ${
+              lessonTypes.virtual.enabled ? "border-[#226D50] bg-[#226D50]/5" : "border-gray-200"
+            }`}
+            style={{
+              clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Monitor className="h-6 w-6 text-[#226D50]" />
+                <span className="font-serif text-lg tracking-wider">VIRTUAL</span>
+              </div>
+              <button
+                onClick={() =>
+                  setLessonTypes({
+                    ...lessonTypes,
+                    virtual: { ...lessonTypes.virtual, enabled: !lessonTypes.virtual.enabled },
+                  })
+                }
+                className={`w-12 h-6 rounded-full transition-all ${
+                  lessonTypes.virtual.enabled ? "bg-[#226D50]" : "bg-gray-300"
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
+                    lessonTypes.virtual.enabled ? "translate-x-6" : "translate-x-0.5"
+                  }`}
+                />
+              </button>
+            </div>
+
+            {lessonTypes.virtual.enabled && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-gray-400" />
+                  <input
+                    type="number"
+                    value={lessonTypes.virtual.price}
+                    onChange={(e) =>
+                      setLessonTypes({
+                        ...lessonTypes,
+                        virtual: { ...lessonTypes.virtual, price: parseInt(e.target.value) || 0 },
+                      })
+                    }
+                    className="w-20 px-2 py-1 border border-gray-200 text-sm focus:outline-none focus:border-[#226D50]"
+                  />
+                  <span className="text-sm text-gray-500">per lesson</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <select
+                    value={lessonTypes.virtual.duration}
+                    onChange={(e) =>
+                      setLessonTypes({
+                        ...lessonTypes,
+                        virtual: { ...lessonTypes.virtual, duration: parseInt(e.target.value) },
+                      })
+                    }
+                    className="px-2 py-1 border border-gray-200 text-sm focus:outline-none focus:border-[#226D50]"
+                  >
+                    <option value={30}>30 min</option>
+                    <option value={45}>45 min</option>
+                    <option value={60}>60 min</option>
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Simulator */}
+          <div
+            className={`p-5 border-2 transition-all ${
+              lessonTypes.simulator.enabled ? "border-[#a29e7b] bg-[#a29e7b]/5" : "border-gray-200"
+            }`}
+            style={{
+              clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Check className="h-6 w-6 text-[#a29e7b]" />
+                <span className="font-serif text-lg tracking-wider">SIMULATOR</span>
+              </div>
+              <button
+                onClick={() =>
+                  setLessonTypes({
+                    ...lessonTypes,
+                    simulator: { ...lessonTypes.simulator, enabled: !lessonTypes.simulator.enabled },
+                  })
+                }
+                className={`w-12 h-6 rounded-full transition-all ${
+                  lessonTypes.simulator.enabled ? "bg-[#a29e7b]" : "bg-gray-300"
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
+                    lessonTypes.simulator.enabled ? "translate-x-6" : "translate-x-0.5"
+                  }`}
+                />
+              </button>
+            </div>
+
+            {lessonTypes.simulator.enabled && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-gray-400" />
+                  <input
+                    type="number"
+                    value={lessonTypes.simulator.price}
+                    onChange={(e) =>
+                      setLessonTypes({
+                        ...lessonTypes,
+                        simulator: { ...lessonTypes.simulator, price: parseInt(e.target.value) || 0 },
+                      })
+                    }
+                    className="w-20 px-2 py-1 border border-gray-200 text-sm focus:outline-none focus:border-[#a29e7b]"
+                  />
+                  <span className="text-sm text-gray-500">per lesson</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <select
+                    value={lessonTypes.simulator.duration}
+                    onChange={(e) =>
+                      setLessonTypes({
+                        ...lessonTypes,
+                        simulator: { ...lessonTypes.simulator, duration: parseInt(e.target.value) },
+                      })
+                    }
+                    className="px-2 py-1 border border-gray-200 text-sm focus:outline-none focus:border-[#a29e7b]"
+                  >
+                    <option value={45}>45 min</option>
+                    <option value={60}>60 min</option>
+                    <option value={90}>90 min</option>
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* On-Course */}
+          <div
+            className={`p-5 border-2 transition-all ${
+              lessonTypes.onCourse.enabled ? "border-[#D4AF37] bg-[#D4AF37]/5" : "border-gray-200"
+            }`}
+            style={{
+              clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Flag className="h-6 w-6 text-[#D4AF37]" />
+                <span className="font-serif text-lg tracking-wider">ON-COURSE</span>
+              </div>
+              <button
+                onClick={() =>
+                  setLessonTypes({
+                    ...lessonTypes,
+                    onCourse: { ...lessonTypes.onCourse, enabled: !lessonTypes.onCourse.enabled },
+                  })
+                }
+                className={`w-12 h-6 rounded-full transition-all ${
+                  lessonTypes.onCourse.enabled ? "bg-[#D4AF37]" : "bg-gray-300"
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
+                    lessonTypes.onCourse.enabled ? "translate-x-6" : "translate-x-0.5"
+                  }`}
+                />
+              </button>
+            </div>
+
+            {lessonTypes.onCourse.enabled && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-gray-400" />
+                  <input
+                    type="number"
+                    value={lessonTypes.onCourse.price}
+                    onChange={(e) =>
+                      setLessonTypes({
+                        ...lessonTypes,
+                        onCourse: { ...lessonTypes.onCourse, price: parseInt(e.target.value) || 0 },
+                      })
+                    }
+                    className="w-20 px-2 py-1 border border-gray-200 text-sm focus:outline-none focus:border-[#D4AF37]"
+                  />
+                  <span className="text-sm text-gray-500">per lesson</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <select
+                    value={lessonTypes.onCourse.duration}
+                    onChange={(e) =>
+                      setLessonTypes({
+                        ...lessonTypes,
+                        onCourse: { ...lessonTypes.onCourse, duration: parseInt(e.target.value) },
+                      })
+                    }
+                    className="px-2 py-1 border border-gray-200 text-sm focus:outline-none focus:border-[#D4AF37]"
+                  >
+                    <option value={60}>60 min</option>
+                    <option value={90}>90 min</option>
+                    <option value={120}>120 min</option>
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Two Column - Specialties + Locations */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Specialties Card */}
+        <div
+          className="bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.12)]"
+          style={{
+            clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+          }}
+        >
+          <h4 className="font-serif text-sm tracking-[0.1em] text-gray-400 mb-5">SPECIALTIES</h4>
+          <p className="text-xs text-gray-500 mb-4">Select your areas of expertise (shown on your profile)</p>
+
+          <div className="flex flex-wrap gap-2">
+            {allSpecialties.map((specialty) => {
+              const isSelected = specialties.includes(specialty)
+              return (
+                <button
+                  key={specialty}
+                  onClick={() => toggleSpecialty(specialty)}
+                  className={`px-4 py-2 text-sm transition-all ${
+                    isSelected
+                      ? "bg-[#226D50] text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                  style={{
+                    clipPath: "polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
+                  }}
+                >
+                  {isSelected && <Check className="h-3 w-3 inline mr-1" />}
+                  {specialty}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Teaching Locations Card */}
+        <div
+          className="bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.12)]"
+          style={{
+            clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+          }}
+        >
+          <div className="flex items-center justify-between mb-5">
+            <h4 className="font-serif text-sm tracking-[0.1em] text-gray-400">TEACHING LOCATIONS</h4>
+            <button
+              className="flex items-center gap-1 text-sm text-[#226D50] hover:underline"
+            >
+              <Plus className="h-4 w-4" />
+              Add Location
+            </button>
+          </div>
+
+          <div className="space-y-3">
+            {locations.map((location) => (
+              <div
+                key={location.id}
+                className="flex items-start gap-3 p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
+                style={{
+                  clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+                }}
+              >
+                <MapPin className="h-5 w-5 text-[#a29e7b] mt-0.5" />
+                <div className="flex-1">
+                  <p className="font-medium text-black text-sm">{location.name}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{location.address}</p>
+                  <span
+                    className={`inline-block mt-2 text-xs px-2 py-0.5 ${
+                      location.type === "simulator"
+                        ? "bg-[#a29e7b]/10 text-[#a29e7b]"
+                        : "bg-[#D4AF37]/10 text-[#D4AF37]"
+                    }`}
+                    style={{
+                      clipPath: "polygon(3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%, 0 3px)",
+                    }}
+                  >
+                    {location.type === "simulator" ? "Simulator" : "Golf Course"}
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <button className="p-1 text-gray-400 hover:text-[#a29e7b]">
+                    <Edit2 className="h-4 w-4" />
+                  </button>
+                  <button className="p-1 text-gray-400 hover:text-[#BF2424]">
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

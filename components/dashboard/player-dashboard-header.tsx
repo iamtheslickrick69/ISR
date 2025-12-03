@@ -87,7 +87,7 @@ export function PlayerDashboardHeader({ activeTab, onTabChange }: PlayerDashboar
             {mobileMenuOpen ? <X className="w-6 h-6 text-[#6B7280]" /> : <Menu className="w-6 h-6 text-[#6B7280]" />}
           </button>
 
-          {/* CaddyMe Logo - FIRST */}
+          {/* CaddyMe Logo */}
           <button
             onClick={handleCaddyMeLogoClick}
             className="relative cursor-pointer transition-transform duration-200 hover:scale-[1.02] overflow-hidden"
@@ -99,25 +99,6 @@ export function PlayerDashboardHeader({ activeTab, onTabChange }: PlayerDashboar
             <Image
               src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/logocaddybaby.png"
               alt="CaddyMe"
-              width={140}
-              height={40}
-              className="h-10 w-auto object-contain"
-              priority
-            />
-          </button>
-
-          {/* Academy Logo - SECOND, next to CaddyMe */}
-          <button
-            onClick={handleAcademyLogoClick}
-            className="relative cursor-pointer transition-transform duration-200 hover:scale-[1.02] overflow-hidden"
-            style={{
-              boxShadow: isInAcademy ? "0 0 12px rgba(191, 36, 36, 0.4)" : "none",
-              clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
-            }}
-          >
-            <Image
-              src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/aaablack1.png"
-              alt="Academy"
               width={140}
               height={40}
               className="h-10 w-auto object-contain"
@@ -148,10 +129,28 @@ export function PlayerDashboardHeader({ activeTab, onTabChange }: PlayerDashboar
                     />
                   )}
                 </button>
-                {index < tabs.length - 1 && <span className="text-[#E5E7EB] font-light">|</span>}
+                <span className="text-[#E5E7EB] font-light">|</span>
               </div>
             )
           })}
+          {/* Academy Button - after Tournaments */}
+          <button
+            onClick={handleAcademyLogoClick}
+            className="relative cursor-pointer transition-transform duration-200 hover:scale-[1.02] overflow-hidden"
+            style={{
+              boxShadow: isInAcademy ? "0 0 12px rgba(191, 36, 36, 0.4)" : "none",
+              clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+            }}
+          >
+            <Image
+              src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/aaablack1.png"
+              alt="Academy"
+              width={140}
+              height={40}
+              className="h-10 w-auto object-contain"
+              priority
+            />
+          </button>
         </nav>
 
         <div className="flex items-center">

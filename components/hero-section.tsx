@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Monitor, Flag, ChevronDown, Check } from "lucide-react"
 
 function GolfClubIcon({ className, strokeWidth }: { className?: string; strokeWidth?: number }) {
@@ -23,7 +23,6 @@ function GolfClubIcon({ className, strokeWidth }: { className?: string; strokeWi
 
 export function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
@@ -50,19 +49,14 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden">
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
+      <img
+        src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/a1golfgrasshole.jpg"
+        alt="Golf course background"
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
         style={{ transform: `translateY(${scrollY * 0.3}px)` }}
-      >
-        <source src="https://pub-7824dae2ffd24193b52760c54972be1d.r2.dev/golf.background.mp4" type="video/mp4" />
-      </video>
+      />
       <div
         className="absolute inset-0"
         style={{
@@ -70,56 +64,62 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 pb-12 text-center flex flex-col flex-1 justify-center">
-        <h1
-          className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-wider mb-4 transition-all duration-600 ease-out-expo ${
-            isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-[0.98]"
-          }`}
-          style={{ transitionDelay: "200ms", letterSpacing: isLoaded ? "0.02em" : "0.05em" }}
-        >
-          PRACTICE WITH PURPOSE.
-        </h1>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 text-center flex flex-col flex-1">
+        {/* Title and subtitle - positioned higher */}
+        <div className="mt-8 sm:mt-12">
+          <h1
+            className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-wider mb-4 transition-all duration-600 ease-out-expo ${
+              isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-[0.98]"
+            }`}
+            style={{ transitionDelay: "200ms", letterSpacing: isLoaded ? "0.02em" : "0.05em" }}
+          >
+            PRACTICE WITH PURPOSE.
+          </h1>
 
-        <p
-          className={`text-white/90 text-lg sm:text-xl max-w-[650px] mx-auto mb-8 leading-relaxed transition-all duration-500 ease-out-expo ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ transitionDelay: "350ms" }}
-        >
-          Join the #1 golf community that takes every player to the next level and every instructor to their next
-          lesson.
-        </p>
+          <p
+            className={`text-white/90 text-lg sm:text-xl max-w-[650px] mx-auto mb-8 leading-relaxed transition-all duration-500 ease-out-expo ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "350ms" }}
+          >
+            Join the #1 golf community that takes every player to the next level and every instructor to their next
+            lesson.
+          </p>
 
-        <div
-          className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 transition-all duration-500 ease-out-expo ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ transitionDelay: "450ms" }}
-        >
-          <button className="group chamfer bg-[#226D50] text-white px-8 py-4 text-sm font-medium uppercase tracking-wider hover:-translate-y-[3px] hover:shadow-[0_6px_20px_rgba(34,109,80,0.35)] active:translate-y-[-1px] active:shadow-[0_2px_8px_rgba(34,109,80,0.25)] transition-all duration-200 ease-out-expo w-full sm:w-auto">
-            Create Free Account <span className="btn-arrow inline-block">→</span>
-          </button>
-          <button className="group chamfer border-2 border-white text-white px-8 py-4 text-sm font-medium uppercase tracking-wider hover:bg-white/10 hover:-translate-y-[2px] transition-all duration-200 ease-out-expo w-full sm:w-auto">
-            For Instructors
-          </button>
+          <div
+            className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 transition-all duration-500 ease-out-expo ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "450ms" }}
+          >
+            <button className="group chamfer bg-[#226D50] text-white px-8 py-4 text-sm font-medium uppercase tracking-wider hover:-translate-y-[3px] hover:shadow-[0_6px_20px_rgba(34,109,80,0.35)] active:translate-y-[-1px] active:shadow-[0_2px_8px_rgba(34,109,80,0.25)] transition-all duration-200 ease-out-expo w-full sm:w-auto">
+              Create Free Account <span className="btn-arrow inline-block">→</span>
+            </button>
+            <button className="group chamfer border-2 border-white text-white px-8 py-4 text-sm font-medium uppercase tracking-wider hover:bg-white/10 hover:-translate-y-[2px] transition-all duration-200 ease-out-expo w-full sm:w-auto">
+              For Instructors
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mt-4 mb-8">
-          {formatCards.map((card, index) => (
-            <div
-              key={card.title}
-              className={`card-hover chamfer p-8 text-center transition-all duration-250 ease-out-expo
-                bg-white/15 backdrop-blur-[16px] border border-white/25
-                shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_8px_32px_rgba(0,0,0,0.2)]
-                hover:bg-white/20 hover:-translate-y-[6px] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_12px_40px_rgba(0,0,0,0.25)]
-                ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              style={{ transitionDelay: `${650 + index * 75}ms` }}
-            >
-              <card.icon className="card-icon h-10 w-10 mx-auto mb-4 text-white drop-shadow-lg" strokeWidth={1.5} />
-              <h3 className="font-serif text-xl tracking-wider mb-2 text-white drop-shadow-md">{card.title}</h3>
-              <p className="text-white/80 text-sm drop-shadow-sm">{card.desc}</p>
-            </div>
-          ))}
+        {/* Cards - positioned lower and shrunk by 20% */}
+        <div className="mt-auto mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+            {formatCards.map((card, index) => (
+              <div
+                key={card.title}
+                className={`card-hover chamfer p-6 text-center transition-all duration-250 ease-out-expo
+                  bg-white/15 backdrop-blur-[16px] border border-white/25
+                  shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_8px_32px_rgba(0,0,0,0.2)]
+                  hover:bg-white/20 hover:-translate-y-[6px] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_12px_40px_rgba(0,0,0,0.25)]
+                  ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                style={{ transitionDelay: `${650 + index * 75}ms` }}
+              >
+                <card.icon className="card-icon h-8 w-8 mx-auto mb-3 text-white drop-shadow-lg" strokeWidth={1.5} />
+                <h3 className="font-serif text-base tracking-wider mb-1.5 text-white drop-shadow-md">{card.title}</h3>
+                <p className="text-white/80 text-xs drop-shadow-sm">{card.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div
